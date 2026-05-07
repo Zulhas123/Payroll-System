@@ -26,3 +26,4 @@ appsettings.*.local.json
 .temp/
 .nuget/
 .tools/
+_efcheck/

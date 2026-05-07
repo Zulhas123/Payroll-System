@@ -40,3 +40,11 @@ Then from repo root:
 
 ### 3) Run
 - `dotnet run --project .\\src\\Web\\PayrollSystem.Web`
+
+## JWT (minimal API auth)
+This project includes a minimal JWT setup for API endpoints:
+- Login: `POST /api/auth/login`
+- Sample protected endpoint: `GET /api/secure/ping` (requires `Authorization: Bearer <token>`)
+
+Credentials are configured in `src/Web/PayrollSystem.Web/appsettings.json` under `Admin`.
+Update `Jwt:Key` to a long random secret before using in any real environment.
