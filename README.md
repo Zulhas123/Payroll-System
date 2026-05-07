@@ -9,7 +9,10 @@ Minimal payroll management app using:
 ## Features (implemented)
 - Departments: CRUD
 - Employees: CRUD (department + basic salary + active flag)
+- Attendance (MVP): manual add/update + list
+- Leave (MVP): leave types + leave request + approve/reject
 - Payroll runs: generate a run for a pay period for all active employees (basic salary only) and view results
+- Payslip (MVP): printable HTML payslip per employee per payroll run
 
 ## Architecture (Clean Architecture folder layout)
 Projects are organized under `src/`:

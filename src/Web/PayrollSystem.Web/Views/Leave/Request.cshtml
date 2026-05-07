@@ -1,0 +1,48 @@
+@model PayrollSystem.Web.ViewModels.LeaveRequestCreateVm
+
+@{
+    ViewData["Title"] = "Request Leave";
+}
+
+<h1 class="h3">Request leave</h1>
+
+<div class="card shadow-sm">
+    <div class="card-body">
+        <form asp-action="Request" method="post" class="row g-3">
+            <div class="col-md-6">
+                <label asp-for="EmployeeId" class="form-label"></label>
+                <select asp-for="EmployeeId" class="form-select" asp-items="ViewBag.EmployeeId"></select>
+                <span asp-validation-for="EmployeeId" class="text-danger"></span>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="LeaveTypeId" class="form-label"></label>
+                <select asp-for="LeaveTypeId" class="form-select" asp-items="ViewBag.LeaveTypeId"></select>
+                <span asp-validation-for="LeaveTypeId" class="text-danger"></span>
+            </div>
+            <div class="col-md-4">
+                <label asp-for="StartDate" class="form-label"></label>
+                <input asp-for="StartDate" class="form-control" />
+                <span asp-validation-for="StartDate" class="text-danger"></span>
+            </div>
+            <div class="col-md-4">
+                <label asp-for="EndDate" class="form-label"></label>
+                <input asp-for="EndDate" class="form-control" />
+                <span asp-validation-for="EndDate" class="text-danger"></span>
+            </div>
+            <div class="col-md-12">
+                <label asp-for="Reason" class="form-label"></label>
+                <textarea asp-for="Reason" class="form-control" rows="3"></textarea>
+                <span asp-validation-for="Reason" class="text-danger"></span>
+            </div>
+            <div class="col-12">
+                <button class="btn btn-primary" type="submit">Submit</button>
+                <a class="btn btn-link" asp-action="Requests">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+

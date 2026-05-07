@@ -1,0 +1,34 @@
+@model PayrollSystem.Domain.Entities.LeaveType
+
+@{
+    ViewData["Title"] = "Create Leave Type";
+}
+
+<h1 class="h3">Create leave type</h1>
+
+<div class="card shadow-sm">
+    <div class="card-body">
+        <form asp-action="CreateType" method="post" class="row g-3">
+            <div class="col-md-6">
+                <label asp-for="Name" class="form-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="col-md-6 d-flex align-items-end">
+                <div class="form-check">
+                    <input class="form-check-input" asp-for="IsPaid" />
+                    <label class="form-check-label" asp-for="IsPaid">Paid</label>
+                </div>
+            </div>
+            <div class="col-12">
+                <button class="btn btn-primary" type="submit">Save</button>
+                <a class="btn btn-link" asp-action="Types">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+

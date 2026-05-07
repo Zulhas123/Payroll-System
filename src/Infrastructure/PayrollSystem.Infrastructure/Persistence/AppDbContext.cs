@@ -11,6 +11,9 @@ public sealed class AppDbContext : DbContext
 
     public DbSet<Department> Departments => Set<Department>();
     public DbSet<Employee> Employees => Set<Employee>();
+    public DbSet<AttendanceRecord> AttendanceRecords => Set<AttendanceRecord>();
+    public DbSet<LeaveType> LeaveTypes => Set<LeaveType>();
+    public DbSet<LeaveRequest> LeaveRequests => Set<LeaveRequest>();
     public DbSet<PayPeriod> PayPeriods => Set<PayPeriod>();
     public DbSet<PayrollRun> PayrollRuns => Set<PayrollRun>();
     public DbSet<PayrollLine> PayrollLines => Set<PayrollLine>();
@@ -25,6 +28,10 @@ public sealed class AppDbContext : DbContext
 
         modelBuilder.Entity<Employee>()
             .HasIndex(e => e.EmployeeNo)
+            .IsUnique();
+
+        modelBuilder.Entity<AttendanceRecord>()
+            .HasIndex(a => new { a.EmployeeId, a.Date })
             .IsUnique();
 
         modelBuilder.Entity<Employee>()

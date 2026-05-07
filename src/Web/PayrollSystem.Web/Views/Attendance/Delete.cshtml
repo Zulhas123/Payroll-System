@@ -1,0 +1,20 @@
+@model PayrollSystem.Domain.Entities.AttendanceRecord
+
+@{
+    ViewData["Title"] = "Delete Attendance";
+}
+
+<h1 class="h3">Delete attendance record</h1>
+
+<div class="alert alert-warning">
+    <div class="fw-semibold">This action cannot be undone.</div>
+    <div>Date: <span class="fw-semibold">@Model.Date.ToString("yyyy-MM-dd")</span></div>
+    <div>Employee: <span class="fw-semibold">@Model.Employee?.EmployeeNo</span></div>
+</div>
+
+<form asp-action="DeleteConfirmed" method="post">
+    <input type="hidden" name="id" value="@Model.Id" />
+    <button class="btn btn-danger" type="submit">Delete</button>
+    <a class="btn btn-link" asp-action="Index">Cancel</a>
+</form>
+

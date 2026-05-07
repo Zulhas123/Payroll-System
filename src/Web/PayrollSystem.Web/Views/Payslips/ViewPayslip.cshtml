@@ -1,0 +1,63 @@
+@model PayrollSystem.Domain.Entities.PayrollLine
+
+@{
+    ViewData["Title"] = "Payslip";
+    var run = (PayrollSystem.Domain.Entities.PayrollRun)ViewBag.Run;
+    var period = run.PayPeriod;
+}
+
+<div class="d-print-none d-flex justify-content-between align-items-center mb-3">
+    <h1 class="h3 mb-0">Payslip</h1>
+    <div class="d-flex gap-2">
+        <button class="btn btn-outline-secondary" onclick="window.print()">Print</button>
+        <a class="btn btn-outline-secondary" asp-controller="Payroll" asp-action="Details" asp-route-id="@run.Id">Back</a>
+    </div>
+</div>
+
+<div class="card shadow-sm">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="fw-semibold">Employee</div>
+                <div>@Model.Employee?.FullName</div>
+                <div class="text-muted">@Model.Employee?.EmployeeNo · @Model.Employee?.Department?.Name</div>
+            </div>
+            <div class="col-md-6 text-md-end">
+                <div class="fw-semibold">Pay period</div>
+                <div>@period?.StartDate.ToString("yyyy-MM-dd") - @period?.EndDate.ToString("yyyy-MM-dd")</div>
+                <div class="text-muted">Run ID: @run.Id</div>
+            </div>
+        </div>
+
+        <hr />
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="fw-semibold mb-2">Earnings</div>
+                <div class="d-flex justify-content-between">
+                    <span>Basic</span>
+                    <span>@Model.Basic.ToString("C")</span>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <span>Allowances</span>
+                    <span>@Model.Allowances.ToString("C")</span>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="fw-semibold mb-2">Deductions</div>
+                <div class="d-flex justify-content-between">
+                    <span>Deductions</span>
+                    <span>@Model.Deductions.ToString("C")</span>
+                </div>
+            </div>
+        </div>
+
+        <hr />
+
+        <div class="d-flex justify-content-between fs-5">
+            <span class="fw-semibold">Net pay</span>
+            <span class="fw-semibold">@Model.NetPay.ToString("C")</span>
+        </div>
+    </div>
+</div>
+

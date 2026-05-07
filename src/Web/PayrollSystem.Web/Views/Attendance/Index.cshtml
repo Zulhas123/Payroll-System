@@ -1,0 +1,54 @@
+@model List<PayrollSystem.Domain.Entities.AttendanceRecord>
+
+@{
+    ViewData["Title"] = "Attendance";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h1 class="h3 mb-0">Attendance</h1>
+    <a class="btn btn-primary" asp-action="Upsert">Add / update</a>
+</div>
+
+<div class="card shadow-sm">
+    <div class="table-responsive">
+        <table class="table table-striped mb-0 align-middle">
+            <thead>
+            <tr>
+                <th>Date</th>
+                <th>Employee #</th>
+                <th>Name</th>
+                <th>Department</th>
+                <th class="text-end">Check-in</th>
+                <th class="text-end">Check-out</th>
+                <th class="text-end">Hours</th>
+                <th class="text-end" style="width: 130px;">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            @if (Model.Count == 0)
+            {
+                <tr><td colspan="8" class="text-muted">No attendance records yet.</td></tr>
+            }
+            else
+            {
+                foreach (var a in Model)
+                {
+                    <tr>
+                        <td>@a.Date.ToString("yyyy-MM-dd")</td>
+                        <td>@a.Employee?.EmployeeNo</td>
+                        <td>@a.Employee?.FullName</td>
+                        <td>@a.Employee?.Department?.Name</td>
+                        <td class="text-end">@a.CheckIn?.ToString("HH:mm")</td>
+                        <td class="text-end">@a.CheckOut?.ToString("HH:mm")</td>
+                        <td class="text-end">@((a.TotalHours ?? 0m).ToString("0.##"))</td>
+                        <td class="text-end">
+                            <a class="btn btn-sm btn-outline-danger" asp-action="Delete" asp-route-id="@a.Id">Delete</a>
+                        </td>
+                    </tr>
+                }
+            }
+            </tbody>
+        </table>
+    </div>
+</div>
+

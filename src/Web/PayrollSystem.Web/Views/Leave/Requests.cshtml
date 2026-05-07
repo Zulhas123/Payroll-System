@@ -1,0 +1,80 @@
+@model List<PayrollSystem.Domain.Entities.LeaveRequest>
+
+@{
+    ViewData["Title"] = "Leave Requests";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h1 class="h3 mb-0">Leave requests</h1>
+    <div class="d-flex gap-2">
+        <a class="btn btn-outline-secondary" asp-action="Types">Types</a>
+        <a class="btn btn-primary" asp-action="Request">New request</a>
+    </div>
+</div>
+
+<div class="card shadow-sm">
+    <div class="table-responsive">
+        <table class="table table-striped mb-0 align-middle">
+            <thead>
+            <tr>
+                <th>Requested</th>
+                <th>Employee #</th>
+                <th>Type</th>
+                <th>Dates</th>
+                <th>Status</th>
+                <th class="text-end" style="width: 220px;">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            @if (Model.Count == 0)
+            {
+                <tr><td colspan="6" class="text-muted">No leave requests yet.</td></tr>
+            }
+            else
+            {
+                foreach (var r in Model)
+                {
+                    <tr>
+                        <td>@r.RequestedAtUtc.ToLocalTime().ToString("yyyy-MM-dd")</td>
+                        <td>@r.Employee?.EmployeeNo</td>
+                        <td>@r.LeaveType?.Name</td>
+                        <td>@r.StartDate.ToString("yyyy-MM-dd") - @r.EndDate.ToString("yyyy-MM-dd")</td>
+                        <td>
+                            @if (r.Status == PayrollSystem.Domain.Entities.LeaveStatus.Pending)
+                            {
+                                <span class="badge text-bg-warning">Pending</span>
+                            }
+                            else if (r.Status == PayrollSystem.Domain.Entities.LeaveStatus.Approved)
+                            {
+                                <span class="badge text-bg-success">Approved</span>
+                            }
+                            else
+                            {
+                                <span class="badge text-bg-danger">Rejected</span>
+                            }
+                        </td>
+                        <td class="text-end">
+                            @if (r.Status == PayrollSystem.Domain.Entities.LeaveStatus.Pending)
+                            {
+                                <form class="d-inline" asp-action="Approve" method="post">
+                                    <input type="hidden" name="id" value="@r.Id" />
+                                    <button class="btn btn-sm btn-outline-success" type="submit">Approve</button>
+                                </form>
+                                <form class="d-inline" asp-action="Reject" method="post">
+                                    <input type="hidden" name="id" value="@r.Id" />
+                                    <button class="btn btn-sm btn-outline-danger" type="submit">Reject</button>
+                                </form>
+                            }
+                            else
+                            {
+                                <span class="text-muted">—</span>
+                            }
+                        </td>
+                    </tr>
+                }
+            }
+            </tbody>
+        </table>
+    </div>
+</div>
+

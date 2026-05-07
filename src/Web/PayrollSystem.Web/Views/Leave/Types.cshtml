@@ -1,0 +1,49 @@
+@model List<PayrollSystem.Domain.Entities.LeaveType>
+
+@{
+    ViewData["Title"] = "Leave Types";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h1 class="h3 mb-0">Leave types</h1>
+    <a class="btn btn-primary" asp-action="CreateType">New type</a>
+</div>
+
+<div class="card shadow-sm">
+    <div class="table-responsive">
+        <table class="table table-striped mb-0 align-middle">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th class="text-center" style="width: 140px;">Paid</th>
+            </tr>
+            </thead>
+            <tbody>
+            @if (Model.Count == 0)
+            {
+                <tr><td colspan="2" class="text-muted">No leave types yet.</td></tr>
+            }
+            else
+            {
+                foreach (var t in Model)
+                {
+                    <tr>
+                        <td>@t.Name</td>
+                        <td class="text-center">
+                            @if (t.IsPaid)
+                            {
+                                <span class="badge text-bg-success">Yes</span>
+                            }
+                            else
+                            {
+                                <span class="badge text-bg-secondary">No</span>
+                            }
+                        </td>
+                    </tr>
+                }
+            }
+            </tbody>
+        </table>
+    </div>
+</div>
+
