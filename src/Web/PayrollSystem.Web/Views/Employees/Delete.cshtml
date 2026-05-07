@@ -1,0 +1,18 @@
+@model PayrollSystem.Domain.Entities.Employee
+
+@{
+    ViewData["Title"] = "Delete Employee";
+}
+
+<h1 class="h3">Delete employee</h1>
+
+<div class="alert alert-warning">
+    <div class="fw-semibold">This action cannot be undone.</div>
+    <div>Employee: <span class="fw-semibold">@Model.EmployeeNo</span> — @Model.FullName</div>
+</div>
+
+<form asp-action="DeleteConfirmed" method="post">
+    <input type="hidden" asp-for="Id" />
+    <button class="btn btn-danger" type="submit">Delete</button>
+    <a class="btn btn-link" asp-action="Index">Cancel</a>
+</form>

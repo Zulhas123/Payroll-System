@@ -1,0 +1,28 @@
+# Build outputs
+**/bin/
+**/obj/
+
+# User-specific files
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# OS files
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Logs
+*.log
+
+# Secrets / local overrides
+appsettings.*.local.json
+
+# Local tooling/cache
+.dotnet/
+.dotnet_home/
+.temp/
+.nuget/
+.tools/

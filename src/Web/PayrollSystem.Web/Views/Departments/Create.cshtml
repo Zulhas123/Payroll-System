@@ -1,0 +1,28 @@
+@model PayrollSystem.Domain.Entities.Department
+
+@{
+    ViewData["Title"] = "Create Department";
+}
+
+<h1 class="h3">Create department</h1>
+<p class="text-muted">Add a new department for grouping employees.</p>
+
+<div class="card shadow-sm">
+    <div class="card-body">
+        <form asp-action="Create" method="post" class="row g-3">
+            <div class="col-md-6">
+                <label asp-for="Name" class="form-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="col-12">
+                <button class="btn btn-primary" type="submit">Save</button>
+                <a class="btn btn-link" asp-action="Index">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

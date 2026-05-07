@@ -1,0 +1,39 @@
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="mb-4">
+    <h1 class="h3 mb-1">Payroll System</h1>
+    <div class="text-muted">Manage departments, employees, and generate payroll runs.</div>
+</div>
+
+<div class="row g-3">
+    <div class="col-md-4">
+        <div class="card shadow-sm h-100">
+            <div class="card-body">
+                <div class="fw-semibold">Departments</div>
+                <div class="text-muted mb-3">Create and maintain departments.</div>
+                <a class="btn btn-outline-primary" asp-controller="Departments" asp-action="Index">Open</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card shadow-sm h-100">
+            <div class="card-body">
+                <div class="fw-semibold">Employees</div>
+                <div class="text-muted mb-3">Add employees and basic salary.</div>
+                <a class="btn btn-outline-primary" asp-controller="Employees" asp-action="Index">Open</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card shadow-sm h-100">
+            <div class="card-body">
+                <div class="fw-semibold">Payroll</div>
+                <div class="text-muted mb-3">Generate payroll runs for a pay period.</div>
+                <a class="btn btn-outline-primary" asp-controller="Payroll" asp-action="Index">Open</a>
+            </div>
+        </div>
+    </div>
+</div>
+

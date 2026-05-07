@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="src/Domain/PayrollSystem.Domain/PayrollSystem.Domain.csproj" />
+  <Project Path="src/Application/PayrollSystem.Application/PayrollSystem.Application.csproj" />
+  <Project Path="src/Infrastructure/PayrollSystem.Infrastructure/PayrollSystem.Infrastructure.csproj" />
+  <Project Path="src/Web/PayrollSystem.Web/PayrollSystem.Web.csproj" />
+</Solution>

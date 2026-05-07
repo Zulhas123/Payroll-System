@@ -1,0 +1,59 @@
+@model List<PayrollSystem.Domain.Entities.Employee>
+
+@{
+    ViewData["Title"] = "Employees";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h1 class="h3 mb-0">Employees</h1>
+    <a class="btn btn-primary" asp-action="Create">New employee</a>
+</div>
+
+<div class="card shadow-sm">
+    <div class="table-responsive">
+        <table class="table table-striped mb-0 align-middle">
+            <thead>
+            <tr>
+                <th>Employee #</th>
+                <th>Name</th>
+                <th>Department</th>
+                <th class="text-end">Basic salary</th>
+                <th class="text-center">Active</th>
+                <th class="text-end" style="width: 220px;">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            @if (Model.Count == 0)
+            {
+                <tr><td colspan="6" class="text-muted">No employees yet.</td></tr>
+            }
+            else
+            {
+                foreach (var e in Model)
+                {
+                    <tr>
+                        <td>@e.EmployeeNo</td>
+                        <td>@e.FullName</td>
+                        <td>@(e.Department?.Name ?? "-")</td>
+                        <td class="text-end">@e.BasicSalary.ToString("C")</td>
+                        <td class="text-center">
+                            @if (e.IsActive)
+                            {
+                                <span class="badge text-bg-success">Yes</span>
+                            }
+                            else
+                            {
+                                <span class="badge text-bg-secondary">No</span>
+                            }
+                        </td>
+                        <td class="text-end">
+                            <a class="btn btn-sm btn-outline-secondary" asp-action="Edit" asp-route-id="@e.Id">Edit</a>
+                            <a class="btn btn-sm btn-outline-danger" asp-action="Delete" asp-route-id="@e.Id">Delete</a>
+                        </td>
+                    </tr>
+                }
+            }
+            </tbody>
+        </table>
+    </div>
+</div>

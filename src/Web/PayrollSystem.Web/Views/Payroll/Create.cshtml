@@ -1,0 +1,34 @@
+@model PayrollSystem.Web.ViewModels.PayrollRunCreateVm
+
+@{
+    ViewData["Title"] = "Create Payroll Run";
+}
+
+<h1 class="h3">Create payroll run</h1>
+<p class="text-muted">Generates a run for all active employees using each employee's basic salary.</p>
+
+<div class="card shadow-sm">
+    <div class="card-body">
+        <form asp-action="Create" method="post" class="row g-3">
+            <div class="col-md-4">
+                <label asp-for="StartDate" class="form-label"></label>
+                <input asp-for="StartDate" class="form-control" />
+                <span asp-validation-for="StartDate" class="text-danger"></span>
+            </div>
+            <div class="col-md-4">
+                <label asp-for="EndDate" class="form-label"></label>
+                <input asp-for="EndDate" class="form-control" />
+                <span asp-validation-for="EndDate" class="text-danger"></span>
+            </div>
+            <div class="col-12">
+                <button class="btn btn-primary" type="submit">Generate</button>
+                <a class="btn btn-link" asp-action="Index">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+

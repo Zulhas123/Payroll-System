@@ -1,0 +1,69 @@
+@model PayrollSystem.Domain.Entities.PayrollRun
+
+@{
+    ViewData["Title"] = "Payroll Run Details";
+    var period = Model.PayPeriod;
+    var totalNet = Model.Lines.Sum(l => l.NetPay);
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <div>
+        <h1 class="h3 mb-1">Payroll run</h1>
+        <div class="text-muted">
+            Period: @period?.StartDate.ToString("yyyy-MM-dd") - @period?.EndDate.ToString("yyyy-MM-dd")
+            · Created: @Model.CreatedAtUtc.ToLocalTime().ToString("yyyy-MM-dd HH:mm")
+        </div>
+    </div>
+    <a class="btn btn-outline-secondary" asp-action="Index">Back</a>
+</div>
+
+<div class="row g-3 mb-3">
+    <div class="col-md-4">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <div class="text-muted">Employees</div>
+                <div class="fs-4 fw-semibold">@Model.Lines.Count</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <div class="text-muted">Total net pay</div>
+                <div class="fs-4 fw-semibold">@totalNet.ToString("C")</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card shadow-sm">
+    <div class="table-responsive">
+        <table class="table table-striped mb-0 align-middle">
+            <thead>
+            <tr>
+                <th>Employee #</th>
+                <th>Name</th>
+                <th>Department</th>
+                <th class="text-end">Basic</th>
+                <th class="text-end">Allowances</th>
+                <th class="text-end">Deductions</th>
+                <th class="text-end">Net pay</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var l in Model.Lines.OrderBy(x => x.Employee!.EmployeeNo))
+            {
+                <tr>
+                    <td>@l.Employee?.EmployeeNo</td>
+                    <td>@l.Employee?.FullName</td>
+                    <td>@l.Employee?.Department?.Name</td>
+                    <td class="text-end">@l.Basic.ToString("C")</td>
+                    <td class="text-end">@l.Allowances.ToString("C")</td>
+                    <td class="text-end">@l.Deductions.ToString("C")</td>
+                    <td class="text-end fw-semibold">@l.NetPay.ToString("C")</td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+</div>
